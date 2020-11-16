@@ -1,13 +1,13 @@
 {
     const IS_ABSENT = 0
-let empCheck = Math.floor(Math.random() * 10) % 2;
-if (empCheck == IS_ABSENT) {
-    console.log("Employee is Absent");
-    return;
-} else {
-    console.log("Employee is Present");
-} 
+    let empCheck = Math.floor(Math.random() * 10) % 2;
+    if (empCheck == IS_ABSENT) {
+        console.log("Employee is Absent");
+    } else {
+        console.log("Employee is Present");
+    }
 }
+
 const IS_PART_TIME = 1;
 const IS_FULL_TIME = 2;
 const PART_TIME_HRS = 4;
@@ -27,21 +27,31 @@ function getWorkingHrs(empCheck) {
     }
 }
 
+// calculating working hours for month
 let empHrs = 0;
 for (var i = 0; i < NUM_OF_WORKING_DAYS; i++) {
     let empCheck = Math.floor(Math.random() * 10) % 3;
     empHrs += getWorkingHrs(empCheck);
 }
 let empWage = empHrs * WAGE_PER_HOUR;
-console.log("Total hrs: " + empHrs + " Emp wage is : " + empWage);
+console.log("Total hrs: " + empHrs + " Emp wage : " + empWage);
+
+// calculating working hours till max working days and hours
+// storing daily wages in an array
+function calcDailyWage(empHrs) {
+    return empHrs * WAGE_PER_HOUR;
+}
 
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
+let empWageArr = new Array(); // daily wage array
 while (totalEmpHrs < MAX_WORKING_HRS && totalWorkingDays < NUM_OF_WORKING_DAYS) {
     totalWorkingDays++;
     let empCheck = Math.floor(Math.random() * 10) % 3;
     let empHrs = getWorkingHrs(empCheck);
     totalEmpHrs += empHrs;
+    empWageArr.push(calcDailyWage(empHrs));
 }
-let employeeWage = totalEmpHrs * WAGE_PER_HOUR;
+let employeeWage = calcDailyWage(totalEmpHrs);
 console.log("Total hrs : " + totalEmpHrs + " Total Employee Wage : " + employeeWage);
+console.log("Employee wages array : " + empWageArr)
